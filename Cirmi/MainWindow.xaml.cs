@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Cirmi.Controller;
+using Cirmi.Logics;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,28 @@ namespace Cirmi
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        IPlayerController playerController;
+
+        public MainWindow() : this(Ioc.Default.GetService<IMapManagerLogic>(), Ioc.Default.GetService<IPlayerLogic>(), Ioc.Default.GetService<IPlayerController>())
+        {
+        }
+
+        public MainWindow(IMapManagerLogic mapLogic, IPlayerLogic playerLogic, IPlayerController _playerController)
         {
             InitializeComponent();
+            playerController = _playerController;
+            gameDisplay.Setup(mapLogic, playerLogic);
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            playerController.KeyPressed(e.Key);
+            gameDisplay.InvalidateVisual();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            gameDisplay.InvalidateVisual();
         }
     }
 }

@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cirmi"
         mc:Ignorable="d"
-        Title="Cirmi's Wonderful Adventures" Height="450" Width="800">
+        Title="Cirmi's Wonderful Adventures" Height="450" Width="800"
+        Loaded="Window_Loaded" KeyDown="Window_KeyDown">
     <Grid>
-
+        <local:GameDisplay x:Name="gameDisplay"/>
     </Grid>
 </Window>
