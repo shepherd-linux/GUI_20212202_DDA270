@@ -59,5 +59,21 @@ namespace Cirmi.Logics
 
             Player.Sprite.PauseAnimation();
         }
+
+        public void Interact()
+        {
+            var collidedElement = mapLogic.MapElements[1].Find(e => e.Area == Player.Area.Value);
+
+            if(collidedElement != null)
+            {
+                if (collidedElement.ElementType == GameElementType.ActionBlock)
+                    (collidedElement as ActionBlock).Activate();
+                else if (collidedElement.ElementType == GameElementType.CollectibleItem)
+                {
+                    mapLogic.MapElements[1].Remove(collidedElement);
+                    Player.Score++;
+                }
+            }
+        }
     }
 }

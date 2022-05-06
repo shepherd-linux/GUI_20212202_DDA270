@@ -14,5 +14,6 @@ namespace Cirmi.Logics
         public List<List<GameElement>> MapElements { get; set; }
         public List<Floor> FloorElements { get; set; }
         public bool IsColliding(Rect a);
+        public void EndGame();
     }
 }

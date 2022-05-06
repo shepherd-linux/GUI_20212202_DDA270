@@ -14,6 +14,7 @@ namespace Cirmi.Logics
         public Player Player { get; set; }
         public void Setup(Point location, List<ImageSource> sprites, IMapManagerLogic _mapLogic);
         public void Move(MovementDirection direction);
+        public void Interact();
     }
 
     public enum MovementDirection

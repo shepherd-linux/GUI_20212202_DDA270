@@ -33,6 +33,9 @@ namespace Cirmi.Controller
                 case Key.Right:
                     playerLogic.Move(MovementDirection.Right);
                     break;
+                case Key.E:
+                    playerLogic.Interact();
+                    break;
                 default:
                     break;
             }
