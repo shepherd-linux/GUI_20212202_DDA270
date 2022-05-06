@@ -11,9 +11,11 @@ namespace Cirmi.Models
     public class Player : GameElement
     {
         public CharacterSprite? Sprite { get; set; }
+        public int Score { get; set; }
 
         public Player(Point location) : base(location, GameElementType.Player)
         {
+            Score = 0;
         }
     }
 }
