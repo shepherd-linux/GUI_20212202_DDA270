@@ -61,7 +61,7 @@ namespace Cirmi.ViewModels
             Visibility = Visibility.Collapsed;
             SelectedLevel = 1;
             StartingGame = false;
-            level2Locked = level3Locked = level4Locked = level5Locked = false;
+            level2Locked = level3Locked = level4Locked = level5Locked = true;
             SelectLevel1 = new RelayCommand(() => SelectedLevel = 1);
             SelectLevel2 = new RelayCommand(() => SelectedLevel = 2, () => !level2Locked);
             SelectLevel3 = new RelayCommand(() => SelectedLevel = 3, () => !level3Locked);
