@@ -11,7 +11,7 @@ w:208,f,f,f,f,f,f,f,f,w
 w:218,w:216,w:216,w:216,w:216,w:216,w:216,w:216,w:216,w:219
 --
 w,w,w,w,w,w,w,w,w,w
-w,f,f,f,w,a:308,f,f,f,w
+w,f,f,f,w,f,f,f,f,w
 w,f,f,f,w,f,i:928,i:929,i:930,w
 w,c:1055,f,f,w,f,i:936,i:937,i:938,w
 w,w,d:559,w,w,f,i:944,i:945,i:946,w
