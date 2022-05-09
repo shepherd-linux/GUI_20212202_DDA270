@@ -25,6 +25,8 @@ namespace Cirmi.ViewModels
         public SettingsViewModel()
         {
             Visibility = Visibility.Collapsed;
+            MusicVolume = 20;
+            SFXVolume = 50;
             BackToMenu = new RelayCommand(() => Visibility = Visibility.Collapsed);
         }
     }

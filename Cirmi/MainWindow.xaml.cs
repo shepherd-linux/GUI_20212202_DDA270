@@ -36,7 +36,7 @@ namespace Cirmi
             menuLogic.Setup((mainMenuUC.DataContext as MainMenuViewModel), (settingsUC.DataContext as SettingsViewModel),
                 (storeUC.DataContext as StoreViewModel), (selectLevelUC.DataContext as SelectLevelViewModel),
                 (pauseMenuUC.DataContext as PauseMenuViewModel), (gameOverUC.DataContext as GameOverViewModel),
-                (inventoryUC.DataContext as InventoryViewModel), mapLogic);
+                (inventoryUC.DataContext as InventoryViewModel), mapLogic, playerLogic);
             playerController = _playerController;
             gameDisplay.Setup(mapLogic, playerLogic);
         }

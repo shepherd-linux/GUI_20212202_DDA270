@@ -11,7 +11,7 @@ namespace Cirmi.Logics
     {
         public void Setup(MainMenuViewModel mainMenuViewModel, SettingsViewModel settingsViewModel, StoreViewModel storeViewModel,
             SelectLevelViewModel selectLevelViewModel, PauseMenuViewModel pauseMenuViewModel, GameOverViewModel gameOverViewModel,
-            InventoryViewModel inventoryViewModel, IMapManagerLogic mapManagerLogic);
+            InventoryViewModel inventoryViewModel, IMapManagerLogic mapManagerLogic, IPlayerLogic playerLogic);
         public void LoadMainMenu();
         public void LoadSettings();
         public void LoadStore();

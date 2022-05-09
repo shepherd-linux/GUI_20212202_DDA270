@@ -2,6 +2,7 @@
 using Cirmi.SpriteModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,13 @@ namespace Cirmi.Logics
     internal class PlayerLogic : IPlayerLogic
     {
         public Player Player { get; set; }
+        public int SfxVolume { get => sfxVolume; set { sfxVolume = value; ChangeVolume(); } }
+        string[] soundUris;
+
         IMapManagerLogic mapLogic;
         IMenuManagerLogic menuManagerLogic;
+        MediaPlayer sfxMediaPlayer;
+        private int sfxVolume;
 
         public void Setup(Point location, List<ImageSource> sprites, IMapManagerLogic _mapLogic, IMenuManagerLogic _menuManagerLogic)
         {
@@ -22,6 +28,16 @@ namespace Cirmi.Logics
             Player.Sprite = new CharacterSprite(sprites);
             mapLogic = _mapLogic;
             menuManagerLogic = _menuManagerLogic;
+            var appPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds");
+            soundUris = new string[3] { Path.Combine(appPath, "step.mp3"), Path.Combine(appPath, "thump.mp3"), Path.Combine(appPath, "tuna-can.mp3") };
+            sfxMediaPlayer = new MediaPlayer();
+            sfxMediaPlayer.Volume = (double)SfxVolume / 100;
+        }
+
+        void ChangeVolume()
+        {
+            if(sfxMediaPlayer != null)
+                sfxMediaPlayer.Volume = (double)SfxVolume / 100;
         }
 
         public void Move(MovementDirection direction)
@@ -39,6 +55,8 @@ namespace Cirmi.Logics
                 {
                     Player.Location = newLocation;
                     mapLogic.CheckGameOver(Player.Score, Player.Location);
+                    sfxMediaPlayer.Open(new Uri(soundUris[0], UriKind.Absolute));
+                    sfxMediaPlayer.Play();
                 }
                 else
                 {
@@ -56,6 +74,8 @@ namespace Cirmi.Logics
                         if (!mapLogic.IsColliding(newBlockRect))
                         {
                             (collidedElement as PushableBlock).Push(newBlockLocation);
+                            sfxMediaPlayer.Open(new Uri(soundUris[1], UriKind.Absolute));
+                            sfxMediaPlayer.Play();
                             Player.Location = newLocation;
 
                             var actionBlock = mapLogic.MapElements[1].Find(e => e.ElementType == GameElementType.ActionBlock && e.Area == newBlockRect);
@@ -87,6 +107,7 @@ namespace Cirmi.Logics
         public void OpenPauseMenu()
         {
             menuManagerLogic.LoadPauseMenu();
+            sfxMediaPlayer.Volume = (double)SfxVolume / 100;
         }
 
         public void Interact()
@@ -100,6 +121,8 @@ namespace Cirmi.Logics
                     var item = Player.Inventory.FirstOrDefault(i => i.ItemType == CollectableItemType.Placeable);
                     if (item != null)
                     {
+                        sfxMediaPlayer.Open(new Uri(soundUris[1], UriKind.Absolute));
+                        sfxMediaPlayer.Play();
                         item.Area = Player.Area!.Value;
                         item.Location = Player.Location;
                         mapLogic.MapElements[1].Add(item);
@@ -109,6 +132,8 @@ namespace Cirmi.Logics
                 }
                 else if (collidedElement.ElementType == GameElementType.CollectibleItem)
                 {
+                    sfxMediaPlayer.Open(new Uri(soundUris[2], UriKind.Absolute));
+                    sfxMediaPlayer.Play();
                     Player.Inventory.Add(collidedElement as CollectableItem);
                     mapLogic.MapElements[1].Remove(collidedElement);
                 }
@@ -123,6 +148,8 @@ namespace Cirmi.Logics
 
                     if (key != null)
                     {
+                        sfxMediaPlayer.Open(new Uri(soundUris[1], UriKind.Absolute));
+                        sfxMediaPlayer.Play();
                         door.Open();
                         Player.Inventory.Remove(key);
                     }
@@ -132,6 +159,8 @@ namespace Cirmi.Logics
                     var item = Player.Inventory.FirstOrDefault(i => i.ItemType == CollectableItemType.Placeable);
                     if (item != null)
                     {
+                        sfxMediaPlayer.Open(new Uri(soundUris[1], UriKind.Absolute));
+                        sfxMediaPlayer.Play();
                         item.Area = Player.Area!.Value;
                         item.Location = Player.Location;
                         mapLogic.MapElements[1].Add(item);

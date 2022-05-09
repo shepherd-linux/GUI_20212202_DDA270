@@ -8,11 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="cicon.png" />
     <None Remove="Levels\level_01.txt" />
     <None Remove="Levels\level_02.txt" />
     <None Remove="Levels\level_03.txt" />
     <None Remove="Levels\level_04.txt" />
     <None Remove="Levels\level_05.txt" />
+    <None Remove="Sounds\bgm.mp3" />
+    <None Remove="Sounds\step.mp3" />
+    <None Remove="Sounds\thump.mp3" />
+    <None Remove="Sounds\tuna-can.mp3" />
     <None Remove="Sprites\BaseChip_pipo.png" />
     <None Remove="Sprites\pipo-nekonin008.png" />
     <None Remove="Sprites\Skins\Front\nekonin003.png" />
@@ -90,4 +95,21 @@
     <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Sounds\bgm.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\step.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\thump.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\tuna-can.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cicon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

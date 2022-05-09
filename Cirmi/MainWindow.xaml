@@ -7,7 +7,7 @@
         xmlns:uc="clr-namespace:Cirmi.UserControls"
         mc:Ignorable="d"
         Title="Cirmi's Wonderful Adventures" Height="800" Width="800"
-        Loaded="Window_Loaded" KeyDown="Window_KeyDown">
+        Loaded="Window_Loaded" KeyDown="Window_KeyDown" Icon="cicon.png">
     <Canvas>
         <local:GameDisplay x:Name="gameDisplay" Canvas.Top="0" Canvas.Left="0"/>
         <uc:InventoryUserControl x:Name="inventoryUC" Canvas.Top="0" Canvas.Left="0"/>

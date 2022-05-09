@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Cirmi.Logics
 {
@@ -19,13 +21,15 @@ namespace Cirmi.Logics
         GameOverViewModel gameOverViewModel;
         InventoryViewModel inventoryViewModel;
         IMapManagerLogic mapManagerLogic;
-
+        IPlayerLogic playerLogic;
+        MediaPlayer mediaPlayer;
         bool isFromMainMenu;
         int balance;
+        string bgmMusic;
 
         public void Setup(MainMenuViewModel mainMenuViewModel, SettingsViewModel settingsViewModel, StoreViewModel storeViewModel,
             SelectLevelViewModel selectLevelViewModel, PauseMenuViewModel pauseMenuViewModel, GameOverViewModel gameOverViewModel,
-            InventoryViewModel inventoryViewModel, IMapManagerLogic mapManagerLogic)
+            InventoryViewModel inventoryViewModel, IMapManagerLogic mapManagerLogic, IPlayerLogic playerLogic)
         {
             isFromMainMenu = true;
             this.mainMenuViewModel = mainMenuViewModel;
@@ -36,6 +40,12 @@ namespace Cirmi.Logics
             this.gameOverViewModel = gameOverViewModel;
             this.inventoryViewModel = inventoryViewModel;
             this.mapManagerLogic = mapManagerLogic;
+            this.playerLogic = playerLogic;
+            bgmMusic = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds\\bgm.mp3");
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.Open(new Uri(bgmMusic, UriKind.Absolute));
+            mediaPlayer.Volume = (double)settingsViewModel.MusicVolume / 100;
+            playerLogic.SfxVolume = settingsViewModel.SFXVolume;
             this.mainMenuViewModel.PropertyChanged += new PropertyChangedEventHandler(delegate(object sender, PropertyChangedEventArgs e) {
                 if(e.PropertyName == "SelectedMenu")
                 {
@@ -77,6 +87,11 @@ namespace Cirmi.Logics
                             break;
                     }
                 }
+                if(e.PropertyName == "Visibility" && pauseMenuViewModel.Visibility == Visibility.Collapsed)
+                {
+                    mediaPlayer.Stop();
+                    mediaPlayer.Play();
+                }
             });
 
             this.settingsViewModel.PropertyChanged += new PropertyChangedEventHandler(delegate (object sender, PropertyChangedEventArgs e) {
@@ -87,6 +102,10 @@ namespace Cirmi.Logics
                         if (isFromMainMenu)
                             LoadMainMenu();
                         else LoadPauseMenu();
+
+                        mediaPlayer.Stop();
+                        mediaPlayer.Volume = (double)settingsViewModel.MusicVolume / 100;
+                        playerLogic.SfxVolume = settingsViewModel.SFXVolume;
                     }
                 }
             });
@@ -117,6 +136,8 @@ namespace Cirmi.Logics
 
                             mapManagerLogic.LoadNextLevel();
                         }
+
+                        mediaPlayer.Play();
                     }
                 }
             });
@@ -161,6 +182,8 @@ namespace Cirmi.Logics
                                 mapManagerLogic.SelectedLevel = 1;
 
                             mapManagerLogic.LoadNextLevel();
+                            mediaPlayer.Open(new Uri(bgmMusic, UriKind.Absolute));
+                            mediaPlayer.Play();
                         }
                     }
                 }
@@ -175,6 +198,7 @@ namespace Cirmi.Logics
         public void LoadGameOver()
         {
             gameOverViewModel.Visibility = Visibility.Visible;
+            mediaPlayer.Stop();
         }
 
         public void LoadMainMenu()
@@ -182,6 +206,7 @@ namespace Cirmi.Logics
             mainMenuViewModel.SelectedMenu = 0;
             mainMenuViewModel.Visibility = Visibility.Visible;
             isFromMainMenu = true;
+            mediaPlayer.Stop();
         }
 
         public void LoadPauseMenu()
@@ -189,6 +214,7 @@ namespace Cirmi.Logics
             pauseMenuViewModel.SelectedMenu = 0;
             pauseMenuViewModel.Visibility = Visibility.Visible;
             isFromMainMenu = false;
+            mediaPlayer.Stop();
         }
 
         public void LoadSelectLevel()
@@ -199,6 +225,7 @@ namespace Cirmi.Logics
         public void LoadSettings()
         {
             settingsViewModel.Visibility = Visibility.Visible;
+            mediaPlayer.Stop();
         }
 
         public void LoadStore()
