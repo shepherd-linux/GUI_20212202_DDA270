@@ -24,6 +24,7 @@ namespace Cirmi.Models
 
             IsPermeable = ElementType == GameElementType.Wall ||
                           ElementType == GameElementType.Door ||
+                          ElementType == GameElementType.PushableBlock ||
                           ElementType == GameElementType.ImpermeableDecorationBlock ? false : true;
 
             Area = new Rect(location.X, location.Y, 32, 32);

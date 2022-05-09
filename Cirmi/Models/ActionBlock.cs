@@ -10,33 +10,40 @@ namespace Cirmi.Models
     public class ActionBlock : GameElement
     {
         public List<GameElement> ConnectedElements { get; set; }
+        bool canActivate;
 
         public ActionBlock(Point location, GameElementType elementType) : base(location, elementType)
         {
             ConnectedElements = new List<GameElement>();
+            canActivate = false;
         }
 
         public void Activate()
         {
-            if(ConnectedElements.Count > 0)
+            if (ConnectedElements.Count == 1)
+                canActivate = true;
+
+            if (ConnectedElements.Count > 0)
             {
                 foreach (var connElement in ConnectedElements)
                 {
-                    switch (connElement.ElementType)
+                    if ((connElement.ElementType == GameElementType.PushableBlock ||
+                        (connElement.ElementType == GameElementType.CollectibleItem && (connElement as CollectableItem).ItemType == CollectableItemType.Placeable)) &&
+                        connElement.Location == Location)
+                        canActivate = true;
+                    else if (canActivate)
                     {
-                        case GameElementType.Door:
-                            (connElement as Door).Open();
-                            break;
-                        case GameElementType.PushableBlock:
-                            (connElement as PushableBlock).Push();
-                            break;
-                        case GameElementType.ActionBlock:
-                            (connElement as ActionBlock).Activate();
-                            break;
-                        case GameElementType.CollectibleItem:
-                            break;
-                        default:
-                            break;
+                        switch (connElement.ElementType)
+                        {
+                            case GameElementType.Door:
+                                (connElement as Door).Open();
+                                break;
+                            case GameElementType.ActionBlock:
+                                (connElement as ActionBlock).Activate();
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
             }

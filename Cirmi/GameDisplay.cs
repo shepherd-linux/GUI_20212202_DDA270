@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Cirmi
 {
@@ -14,18 +15,26 @@ namespace Cirmi
     {
         IMapManagerLogic mapLogic;
         IPlayerLogic playerLogic;
+        AnimationClock animClock;
+        RectAnimation moveAnimation;
+
+        public bool PlayerAnimationCompleted { get; set; }
 
         public void Setup(IMapManagerLogic _mapLogic, IPlayerLogic _playerLogic)
         {
             mapLogic = _mapLogic;
             playerLogic = _playerLogic;
+            moveAnimation = new RectAnimation();
+            moveAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(400));
+            PlayerAnimationCompleted = true;
+            mapLogic.LevelLoaded += InvalidateVisual;
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
 
-            if (mapLogic != null)
+            if (mapLogic != null && mapLogic.FloorElements != null)
             {
                 for (int i = 0; i < mapLogic.FloorElements.Count; i++)
                 {
@@ -41,11 +50,23 @@ namespace Cirmi
                 }
             }
 
-            if(playerLogic != null)
+            if (playerLogic != null && playerLogic.Player != null)
             {
-                playerLogic.Player.Area = new Rect(playerLogic.Player.Location.X, playerLogic.Player.Location.Y, 32, 32);
-                drawingContext.DrawRectangle(playerLogic.Player.Sprite?.Brush, null, playerLogic.Player.Area!.Value);
+                var newPos = new Rect(playerLogic.Player.Location.X, playerLogic.Player.Location.Y, 32, 32);
+                moveAnimation.From = playerLogic.Player.Area!.Value;
+                moveAnimation.To = newPos;
+                PlayerAnimationCompleted = false;
+                animClock = moveAnimation.CreateClock();
+                animClock.Completed += (sender, e) => AnimationCompleted();
+                playerLogic.Player.Area = newPos;
+                drawingContext.DrawRectangle(playerLogic.Player.Sprite?.Brush, null, playerLogic.Player.Area!.Value, animClock);
             }
+        }
+
+        void AnimationCompleted()
+        {
+            playerLogic.Player.Sprite.PauseAnimation();
+            PlayerAnimationCompleted = true;
         }
     }
 }

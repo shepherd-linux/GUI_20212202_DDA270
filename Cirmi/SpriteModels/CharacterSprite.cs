@@ -9,24 +9,25 @@ using System.Windows.Threading;
 
 namespace Cirmi.SpriteModels
 {
-    public class CharacterSprite : Sprite
-    {
+	public class CharacterSprite : Sprite
+	{
 		private readonly List<ImageSource> animations;
+		private DispatcherTimer animTimer;
 		int idleFrame;
-
-        public DispatcherTimer animTimer;
-		bool animTimerIsRunning = false;
 		int frameDuration = 100;
 		int animIndex = 0;
 		int direction = 0;
 
+		public bool AnimTimerIsRunning { get; set; }
+
 		public CharacterSprite(List<ImageSource> animations, int idleFrame = 1)
-        {
+		{
 			this.animations = animations;
 			this.idleFrame = idleFrame;
 			Brush = new ImageBrush(animations[idleFrame]);
 			animTimer = new DispatcherTimer();
 			animTimer.Tick += (sender, e) => NextFrame();
+			AnimTimerIsRunning = false;
 		}
 
 		public int Direction { get { return direction; } set { direction = value; } }
@@ -38,9 +39,9 @@ namespace Cirmi.SpriteModels
 		/// </summary>
 		public void StartAnimation()
 		{
-			if(!animTimerIsRunning)
-            {
-				animTimerIsRunning = true;
+			if (!AnimTimerIsRunning)
+			{
+				AnimTimerIsRunning = true;
 				animTimer.Interval = TimeSpan.FromMilliseconds(frameDuration);
 				animTimer.Start();
 			}
@@ -51,11 +52,11 @@ namespace Cirmi.SpriteModels
 		/// </summary>
 		public void PauseAnimation()
 		{
-			if (animTimerIsRunning)
+			if (AnimTimerIsRunning)
 			{
 				SetCurrentFrame(animations[1 + (direction * 3)]);
 				animTimer.Stop();
-				animTimerIsRunning = false;
+				AnimTimerIsRunning = false;
 			}
 		}
 
@@ -66,7 +67,7 @@ namespace Cirmi.SpriteModels
 		{
 			animIndex++;
 			animIndex %= 3;
-			SetCurrentFrame(animations[animIndex+(direction*3)]);
+			SetCurrentFrame(animations[animIndex + (direction * 3)]);
 		}
 	}
 }

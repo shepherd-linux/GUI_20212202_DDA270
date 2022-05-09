@@ -12,8 +12,9 @@ namespace Cirmi.Logics
     public interface IPlayerLogic
     {
         public Player Player { get; set; }
-        public void Setup(Point location, List<ImageSource> sprites, IMapManagerLogic _mapLogic);
+        public void Setup(Point location, List<ImageSource> sprites, IMapManagerLogic _mapLogic, IMenuManagerLogic _menuManagerLogic);
         public void Move(MovementDirection direction);
+        public void OpenPauseMenu();
         public void Interact();
     }
 
