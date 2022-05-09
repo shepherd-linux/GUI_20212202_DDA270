@@ -73,6 +73,13 @@ namespace Cirmi.Logics
                     mapLogic.MapElements[1].Remove(collidedElement);
                     Player.Score++;
                 }
+                else if (collidedElement.ElementType == GameElementType.PushableBlock)
+                {
+                    PushableBlock pb = new PushableBlock(collidedElement.Location,collidedElement.ElementType,Player,mapLogic);
+                    pb.Push();
+                    mapLogic.MapElements[1].Remove(collidedElement); //not needed
+                    mapLogic.MapElements[1].Add(pb);
+                }
             }
         }
     }

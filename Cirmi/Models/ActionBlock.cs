@@ -28,6 +28,7 @@ namespace Cirmi.Models
                             (connElement as Door).Open();
                             break;
                         case GameElementType.PushableBlock:
+                            (connElement as PushableBlock).Push();
                             break;
                         case GameElementType.ActionBlock:
                             (connElement as ActionBlock).Activate();
