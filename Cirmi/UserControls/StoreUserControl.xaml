@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Cirmi.UserControls.StoreUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cirmi.UserControls"
+             xmlns:vm="clr-namespace:Cirmi.ViewModels"
+             mc:Ignorable="d" 
+             Height="800" Width="800">
+    <UserControl.DataContext>
+        <vm:StoreViewModel />
+    </UserControl.DataContext>
+    <StackPanel Background="Wheat" Visibility="{Binding Visibility}">
+        <Border Margin="100 40" BorderBrush="Gray" BorderThickness="1" CornerRadius="30"  Background="Gray" Padding="0 20">
+                <TextBlock Text="CIRMI'S WONDERFUL ADVENTURES" FontSize="40" FontWeight="Bold" Foreground="Yellow" TextWrapping="Wrap" TextAlignment="Center" />
+        </Border>
+        <TextBlock Text="{Binding Balance, StringFormat=Balance: {0}$}" Margin="20" FontSize="30" VerticalAlignment="Center" TextWrapping="Wrap" Background="Gray" Foreground="Yellow" Width="250"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Grid.Column="1" Height="128" Width="128" Source="../Sprites/Skins/Front/nekonin003.png" Margin="5"/>
+            <Button Command="{Binding SelectSkin1}" Grid.Row="1" Grid.Column="1" Content="0$" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Foreground="Red" Background="Gray" />
+            <Image Grid.Row="0" Grid.Column="2" Height="128" Width="128" Source="../Sprites/Skins/Front/nekonin004.png" Margin="5"/>
+            <Button Command="{Binding SelectSkin2}" Grid.Row="1" Grid.Column="2" Content="{Binding SkinPrice2}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Foreground="Red" Background="Gray"/>
+            <Image Grid.Row="0" Grid.Column="3" Height="128" Width="128" Source="../Sprites/Skins/Front/nekonin005.png" Margin="5"/>
+            <Button Command="{Binding SelectSkin3}" Grid.Row="1" Grid.Column="3" Content="{Binding SkinPrice3}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Foreground="Red" Background="Gray"/>
+            <Image Grid.Row="2" Grid.Column="1" Height="128" Width="128" Source="../Sprites/Skins/Front/nekonin006.png" Margin="5"/>
+            <Button Command="{Binding SelectSkin4}" Grid.Row="3" Grid.Column="1" Content="{Binding SkinPrice4}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Foreground="Red" Background="Gray"/>
+            <Image Grid.Row="2" Grid.Column="2" Height="128" Width="128" Source="../Sprites/Skins/Front/nekonin007.png" Margin="5"/>
+            <Button Command="{Binding SelectSkin5}" Grid.Row="3" Grid.Column="2" Content="{Binding SkinPrice5}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Foreground="Red" Background="Gray"/>
+            <Image Grid.Row="2" Grid.Column="3" Height="128" Width="128" Source="../Sprites/Skins/Front/nekonin008.png" Margin="5"/>
+            <Button Command="{Binding SelectSkin6}" Grid.Row="3" Grid.Column="3" Content="{Binding SkinPrice6}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Foreground="Red" Background="Gray"/>
+            <Button Grid.Row="3" Grid.Column="0" Content="Back" Command="{Binding BackToMenu}" FontSize="40" Foreground="Yellow" Background="Gray" Margin="20"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

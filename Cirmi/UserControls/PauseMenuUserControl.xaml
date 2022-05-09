@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Cirmi.UserControls.PauseMenuUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cirmi.UserControls"
+             xmlns:vm="clr-namespace:Cirmi.ViewModels"
+             mc:Ignorable="d" 
+             Height="800" Width="800">
+    <UserControl.DataContext>
+        <vm:PauseMenuViewModel />
+    </UserControl.DataContext>
+    <StackPanel Background="Wheat" Visibility="{Binding Visibility}">
+        <Border Margin="100 40" BorderBrush="Gray" BorderThickness="1" CornerRadius="30"  Background="Gray" Padding="0 20">
+            <TextBlock Text="CIRMI'S WONDERFUL ADVENTURES" FontSize="64" FontWeight="Bold" Foreground="Yellow" TextWrapping="Wrap" TextAlignment="Center" />
+        </Border>
+        <Button Content="Resume" Command="{Binding Resume}" FontSize="60" Foreground="Yellow" Background="Gray" Margin="200 10"/>
+        <Button Content="Settings" Command="{Binding Settings}" FontSize="60" Foreground="Yellow" Background="Gray" Margin="200 20"/>
+        <Button Content="Exit" Command="{Binding ExitLevel}" FontSize="60" Foreground="Yellow" Background="Gray" Margin="200 20"/>
+    </StackPanel>
+</UserControl>

@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Cirmi.Menu
+namespace Cirmi.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainMenu.xaml
+    /// Interaction logic for SettingsUserControl.xaml
     /// </summary>
-    public partial class MainMenu : Window
+    public partial class SettingsUserControl : UserControl
     {
-        public MainMenu()
+        public SettingsUserControl()
         {
             InitializeComponent();
-        }
-
-        private void ButtonLevel_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Cirmi.Controller;
 using Cirmi.Logics;
+using Cirmi.ViewModels;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -25,21 +26,28 @@ namespace Cirmi
     {
         IPlayerController playerController;
 
-        public MainWindow() : this(Ioc.Default.GetService<IMapManagerLogic>(), Ioc.Default.GetService<IPlayerLogic>(), Ioc.Default.GetService<IPlayerController>())
+        public MainWindow() : this(Ioc.Default.GetService<IMenuManagerLogic>(), Ioc.Default.GetService<IMapManagerLogic>(), Ioc.Default.GetService<IPlayerLogic>(), Ioc.Default.GetService<IPlayerController>())
         {
         }
 
-        public MainWindow(IMapManagerLogic mapLogic, IPlayerLogic playerLogic, IPlayerController _playerController)
+        public MainWindow(IMenuManagerLogic menuLogic, IMapManagerLogic mapLogic, IPlayerLogic playerLogic, IPlayerController _playerController)
         {
             InitializeComponent();
+            menuLogic.Setup((mainMenuUC.DataContext as MainMenuViewModel), (settingsUC.DataContext as SettingsViewModel),
+                (storeUC.DataContext as StoreViewModel), (selectLevelUC.DataContext as SelectLevelViewModel),
+                (pauseMenuUC.DataContext as PauseMenuViewModel), (gameOverUC.DataContext as GameOverViewModel),
+                (inventoryUC.DataContext as InventoryViewModel), mapLogic);
             playerController = _playerController;
             gameDisplay.Setup(mapLogic, playerLogic);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            playerController.KeyPressed(e.Key);
-            gameDisplay.InvalidateVisual();
+            if(gameDisplay.PlayerAnimationCompleted)
+            {
+                playerController.KeyPressed(e.Key);
+                gameDisplay.InvalidateVisual();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

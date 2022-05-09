@@ -21,6 +21,7 @@ namespace Cirmi
         {
             Ioc.Default.ConfigureServices(
                 new ServiceCollection()
+                    .AddSingleton<IMenuManagerLogic, MenuManagerLogic>()
                     .AddSingleton<IMapManagerLogic, MapManagerLogic>()
                     .AddSingleton<IPlayerLogic, PlayerLogic>()
                     .AddSingleton<IPlayerController, PlayerController>()

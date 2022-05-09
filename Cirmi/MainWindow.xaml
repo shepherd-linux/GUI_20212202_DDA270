@@ -4,10 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cirmi"
+        xmlns:uc="clr-namespace:Cirmi.UserControls"
         mc:Ignorable="d"
-        Title="Cirmi's Wonderful Adventures" Height="450" Width="800"
+        Title="Cirmi's Wonderful Adventures" Height="800" Width="800"
         Loaded="Window_Loaded" KeyDown="Window_KeyDown">
-    <Grid>
-        <local:GameDisplay x:Name="gameDisplay"/>
-    </Grid>
+    <Canvas>
+        <local:GameDisplay x:Name="gameDisplay" Canvas.Top="0" Canvas.Left="0"/>
+        <uc:InventoryUserControl x:Name="inventoryUC" Canvas.Top="0" Canvas.Left="0"/>
+        <uc:GameOverUserControl x:Name="gameOverUC" Canvas.Top="0" Canvas.Left="0" />
+        <uc:PauseMenuUserControl x:Name="pauseMenuUC" Canvas.Top="0" Canvas.Left="0"/>
+        <uc:SettingsUserControl x:Name="settingsUC" Canvas.Top="0" Canvas.Left="0"/>
+        <uc:MainMenuUserControl x:Name="mainMenuUC" Canvas.Top="0" Canvas.Left="0"/>
+        <uc:SelectLevelUserControl x:Name="selectLevelUC" Canvas.Top="0" Canvas.Left="0"/>
+        <uc:StoreUserControl x:Name="storeUC" Canvas.Top="0" Canvas.Left="0"/>
+    </Canvas>
 </Window>
