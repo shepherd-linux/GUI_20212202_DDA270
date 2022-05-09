@@ -9,18 +9,78 @@
 
   <ItemGroup>
     <None Remove="Levels\level_01.txt" />
+    <None Remove="Levels\level_02.txt" />
+    <None Remove="Levels\level_03.txt" />
+    <None Remove="Levels\level_04.txt" />
+    <None Remove="Levels\level_05.txt" />
     <None Remove="Sprites\BaseChip_pipo.png" />
     <None Remove="Sprites\pipo-nekonin008.png" />
+    <None Remove="Sprites\Skins\Front\nekonin003.png" />
+    <None Remove="Sprites\Skins\Front\nekonin004.png" />
+    <None Remove="Sprites\Skins\Front\nekonin005.png" />
+    <None Remove="Sprites\Skins\Front\nekonin006.png" />
+    <None Remove="Sprites\Skins\Front\nekonin007.png" />
+    <None Remove="Sprites\Skins\Front\nekonin008.png" />
+    <None Remove="Sprites\Skins\pipo-nekonin003.png" />
+    <None Remove="Sprites\Skins\pipo-nekonin004.png" />
+    <None Remove="Sprites\Skins\pipo-nekonin005.png" />
+    <None Remove="Sprites\Skins\pipo-nekonin006.png" />
+    <None Remove="Sprites\Skins\pipo-nekonin007.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Levels\level_05.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\level_04.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\level_03.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\level_02.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Levels\level_01.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Sprites\BaseChip_pipo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Sprites\pipo-nekonin008.png">
+    <Content Include="Sprites\Skins\Front\nekonin003.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Skins\Front\nekonin004.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Skins\Front\nekonin005.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Skins\Front\nekonin006.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Skins\Front\nekonin007.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Skins\Front\nekonin008.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Skins\pipo-nekonin003.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Skins\pipo-nekonin004.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Skins\pipo-nekonin005.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Skins\pipo-nekonin006.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Skins\pipo-nekonin007.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Skins\pipo-nekonin008.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
